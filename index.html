@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sumbar Hangout Circle | Komunitas Healing, Traveling & Nongkrong</title>
+  <meta name="description" content="Website Resmi Sumbar Hangout Circle (SHC) - Komunitas Traveling, Healing, dan Nongkrong Terbesar di Sumatera Barat. Cari Teman Baru, Ciptakan Cerita Baru.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/images/logo-shc.jpg">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070b08',
+              surface: '#0d1510',
+              card: '#121e16',
+              border: 'rgba(255, 255, 255, 0.08)'
+            },
+            lime: {
+              300: '#bef264',
+              400: '#a3e635',
+              500: '#84cc16',
+              600: '#65a30d'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['"Outfit"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css?v=20">
+</head>
+<body class="bg-[#070b08] text-gray-100 antialiased selection:bg-lime-400 selection:text-black min-h-screen relative">
+
+  <!-- Ambient Soft Ambient Lights -->
+  <div class="ambient-glow-top"></div>
+  <div class="ambient-glow-side -left-48 top-1/3"></div>
+  <div class="ambient-glow-side -right-48 bottom-1/4"></div>
+
+  <!-- ==========================================================================
+       NAVIGATION BAR (FROSTED GLASS PILL)
+       ========================================================================== -->
+  <header>
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          
+          <!-- Logo & Community Identity -->
+          <a href="#beranda" class="flex items-center gap-3.5 group">
+            <div class="relative w-11 h-11 rounded-full overflow-hidden border border-lime-400/40 p-0.5 group-hover:border-lime-400 transition-colors shadow-sm">
+              <img src="assets/images/logo-shc.jpg" alt="Logo Sumbar Hangout Circle" class="w-full h-full object-cover rounded-full">
+            </div>
+            <div class="flex flex-col">
+              <span class="font-heading font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-lime-300 transition-colors">
+                Sumbar Hangout <span class="text-gradient-lime">Circle</span>
+              </span>
+              <span class="text-[11px] font-medium text-gray-400 -mt-0.5 tracking-wide">
+                Padang, Sumatera Barat
+              </span>
+            </div>
+          </a>
+
+          <!-- Desktop Navigation Links -->
+          <div class="hidden md:flex items-center gap-7 text-sm font-semibold text-gray-300">
+            <a href="#beranda" class="hover:text-lime-300 transition-colors py-1">Beranda</a>
+            <a href="#tentang" class="hover:text-lime-300 transition-colors py-1">Tentang</a>
+            <a href="#galeri" class="hover:text-lime-300 transition-colors py-1">Galeri</a>
+            <a href="#gabung" class="hover:text-lime-300 transition-colors py-1">Gabung</a>
+          </div>
+
+          <!-- Right Action Hub: Music, IG, WA -->
+          <div class="hidden sm:flex items-center gap-3">
+            <!-- Music Quick Toggle -->
+            <button class="music-toggle-btn hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-full border border-white/10 bg-[#0d1611]/80 hover:border-lime-500/40 text-xs font-semibold text-gray-200 transition-all shadow-sm">
+              <i class="play-icon-state fa-solid fa-play text-lime-400 text-[10px]"></i>
+              <span id="navMusicLabel">Putar Musik</span>
+            </button>
+
+            <!-- Discord Button -->
+            <a href="https://discord.gg/bBbvepyUeZ" target="_blank" class="official-discord-link hidden lg:flex items-center gap-2 px-4 py-2 rounded-full btn-discord text-xs font-bold text-white transition-all shadow-sm">
+              <i class="fa-brands fa-discord text-sm"></i>
+              <span>Discord</span>
+            </a>
+
+            <!-- Instagram Button -->
+            <a href="https://www.instagram.com/sumbarhangoutcircle/" target="_blank" class="official-ig-link hidden md:flex items-center gap-2 px-4 py-2 rounded-full btn-ig text-xs font-bold text-white transition-all shadow-sm">
+              <i class="fa-brands fa-instagram text-sm"></i>
+              <span>Follow IG</span>
+            </a>
+
+            <!-- WhatsApp Direct CTA -->
+            <a href="https://chat.whatsapp.com/JS7HIwFJaKlJtNHr6Rrsi1" target="_blank" class="direct-join-btn btn-primary-lime px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2">
+              <i class="fa-brands fa-whatsapp text-base"></i>
+              <span>Grup WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Mobile Hamburger Button -->
+          <div class="flex md:hidden">
+            <button id="mobileMenuBtn" aria-label="Menu Navigasi" class="p-2.5 rounded-xl bg-[#0f1913] border border-white/10 text-gray-300 hover:text-white">
+              <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Navigation -->
+      <div id="mobileNav" class="hidden md:hidden border-t border-white/10 bg-[#070b08]/98 backdrop-blur-2xl px-6 py-6 space-y-3 text-base font-semibold">
+        <a href="#beranda" class="mobile-nav-link block py-2 text-gray-300 hover:text-lime-400 border-b border-white/5">Beranda</a>
+        <a href="#tentang" class="mobile-nav-link block py-2 text-gray-300 hover:text-lime-400 border-b border-white/5">Tentang Komunitas</a>
+        <a href="#galeri" class="mobile-nav-link block py-2 text-gray-300 hover:text-lime-400 border-b border-white/5">Galeri Foto & Video</a>
+        <a href="#gabung" class="mobile-nav-link block py-2 text-gray-300 hover:text-lime-400 border-b border-white/5">Gabung Circle</a>
+        
+        <div class="pt-3 space-y-2.5">
+          <a href="https://chat.whatsapp.com/JS7HIwFJaKlJtNHr6Rrsi1" target="_blank" class="direct-join-btn btn-primary-lime block py-3 rounded-xl text-center font-bold text-sm">
+            <i class="fa-brands fa-whatsapp mr-1.5 text-base"></i> Masuk Grup WhatsApp
+          </a>
+          <a href="https://discord.gg/bBbvepyUeZ" target="_blank" class="official-discord-link btn-discord block py-3 rounded-xl text-center font-bold text-sm">
+            <i class="fa-brands fa-discord mr-1.5 text-base"></i> Gabung Server Discord
+          </a>
+          <a href="https://www.instagram.com/sumbarhangoutcircle/" target="_blank" class="official-ig-link btn-ig block py-3 rounded-xl text-center font-bold text-sm">
+            <i class="fa-brands fa-instagram mr-1.5 text-base"></i> Follow Instagram Resmi
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION (BENTO GRID CLUSTER)
+         ========================================================================== -->
+    <section id="beranda" class="relative pt-36 pb-20 md:pt-44 md:pb-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          
+          <!-- Hero Text Content (Left Col 7) -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            
+            <!-- Sleek Badge Pill -->
+            <div class="tag-pill">
+              <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+              <span>Komunitas Traveling & Healing Pemuda Sumbar</span>
+            </div>
+
+            <!-- Main Editorial Heading -->
+            <h1 class="font-heading font-black text-4xl sm:text-6xl xl:text-7xl text-white tracking-tight leading-[1.12]">
+              Cari Teman Baru,<br>
+              Ciptakan <span class="text-gradient-lime">Cerita Baru.</span>
+            </h1>
+
+            <!-- Descriptive Paragraph -->
+            <p class="text-gray-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+              Tempat kumpul asik buat kamu yang mau cari teman baru, nongkrong santai, ataupun pergi healing bareng menikmati indahnya Sumatera Barat. Datang sendirian? Jangan ragu, <strong class="text-white font-semibold">solo traveler selalu disambut hangat tanpa rasa canggung!</strong>
+            </p>
+
+            <!-- Call-to-Action Buttons -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
+              <!-- Join WhatsApp -->
+              <a href="https://chat.whatsapp.com/JS7HIwFJaKlJtNHr6Rrsi1" target="_blank" class="direct-join-btn btn-primary-lime px-7 py-3.5 rounded-full text-sm sm:text-base font-extrabold flex items-center justify-center gap-2.5 shadow-lg">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Gabung Grup WhatsApp</span>
+              </a>
+
+              <!-- Follow Official Instagram -->
+              <a href="https://www.instagram.com/sumbarhangoutcircle/" target="_blank" class="official-ig-link btn-ig px-7 py-3.5 rounded-full text-sm sm:text-base font-bold flex items-center justify-center gap-2.5 shadow-lg">
+                <i class="fa-brands fa-instagram text-xl"></i>
+                <span>Follow Instagram</span>
+              </a>
+
+              <!-- Join Discord -->
+              <a href="https://discord.gg/bBbvepyUeZ" target="_blank" class="official-discord-link btn-discord px-7 py-3.5 rounded-full text-sm sm:text-base font-bold flex items-center justify-center gap-2.5 shadow-lg">
+                <i class="fa-brands fa-discord text-xl"></i>
+                <span>Join Discord</span>
+              </a>
+
+              <!-- Explore Gallery -->
+              <a href="#galeri" class="btn-secondary-dark px-6 py-3.5 rounded-full text-sm font-semibold flex items-center justify-center gap-2">
+                <span>Lihat Dokumentasi Trip</span>
+                <i class="fa-solid fa-arrow-down text-xs text-lime-400"></i>
+              </a>
+            </div>
+
+            <!-- Highlights: Cari Teman, Nongkrong, Healing, Voice 24 Jam -->
+            <div class="pt-5 flex flex-wrap items-center justify-center lg:justify-start gap-5 sm:gap-6 text-xs sm:text-sm text-gray-300 font-medium">
+              <span class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-lime-400"></i> Cari Teman Baru</span>
+              <span class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-lime-400"></i> Nongkrong Santai</span>
+              <span class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-lime-400"></i> Healing Bareng</span>
+              <span class="flex items-center gap-2"><i class="fa-brands fa-discord text-[#7289da]"></i> Mabar & Curhat 24 Jam</span>
+            </div>
+
+          </div>
+
+          <!-- Hero Right: Dynamic Bento Cluster (Right Col 5) -->
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            
+            <!-- Bento Card 1 (Official Community Branding & Identity Showcase) -->
+            <div class="bento-card bento-card-highlight rounded-3xl p-6 sm:p-7 relative overflow-hidden group">
+              <!-- Soft Glow Accent Behind Logo -->
+              <div class="absolute -top-16 -right-16 w-48 h-48 bg-lime-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+              <!-- Top Row Badges -->
+              <div class="flex items-center justify-between mb-5">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-500/10 border border-lime-500/30 text-lime-300 text-xs font-bold shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+                  <span>Official Circle</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs font-semibold text-gray-300 bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                  <i class="fa-solid fa-shield-halved text-lime-400"></i>
+                  <span>Komunitas Resmi</span>
+                </div>
+              </div>
+
+              <!-- Central Emblem & Identity -->
+              <div class="flex flex-col items-center text-center space-y-3.5 py-1">
+                <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-lime-500 via-lime-400 to-emerald-500 shadow-xl shadow-lime-950/40 group-hover:scale-105 transition-transform duration-300">
+                  <div class="w-full h-full rounded-full overflow-hidden bg-[#070b08] p-1">
+                    <img src="assets/images/logo-shc.jpg" alt="Logo Resmi Sumbar Hangout Circle" class="w-full h-full object-cover rounded-full">
+                  </div>
+                  <!-- Mini Nature Badge -->
+                  <div class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-[#0d1611] border border-lime-400 flex items-center justify-center text-lime-400 text-xs shadow-md">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 class="font-heading font-black text-2xl text-white tracking-tight">
+                    Sumbar Hangout Circle
+                  </h3>
+                  <p class="text-xs text-lime-400 font-semibold mt-1">
+                    Wadah Nongkrong, Traveling & Healing Pemuda Sumbar
+                  </p>
+                </div>
+
+                <p class="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-sm">
+                  Komunitas terbuka & inklusif bagi pemuda di Sumatera Barat yang ingin menambah kawan, ngopi santai, hingga jelajah keindahan alam Ranah Minang.
+                </p>
+              </div>
+
+              <!-- Key Community Stats / Pillars Row -->
+              <div class="mt-5 pt-4 border-t border-white/10 grid grid-cols-3 gap-2.5 text-center">
+                <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <span class="block text-xs font-bold text-lime-400">Base</span>
+                  <span class="text-[11px] text-gray-300 font-medium">Padang & Sumbar</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <span class="block text-xs font-bold text-lime-400">Suasana</span>
+                  <span class="text-[11px] text-gray-300 font-medium">Positif & Akrab</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <span class="block text-xs font-bold text-lime-400">Gabung</span>
+                  <span class="text-[11px] text-gray-300 font-medium">100% Gratis</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bento Card Bottom Row (2 Sub-Cards) -->
+            <div class="grid grid-cols-2 gap-4">
+              
+              <!-- Sub-Card 1: Open Trip & Healing -->
+              <div class="bento-card rounded-2xl p-4 flex flex-col justify-between group">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">🌿</span>
+                  <span class="text-xs font-bold text-lime-400">Trip & Nongkrong</span>
+                </div>
+                <div class="mt-3">
+                  <span class="block font-heading font-black text-2xl text-white">Open Trip</span>
+                  <span class="text-[11px] text-gray-400 leading-tight block mt-0.5">Jelajah alam & ngopi asik</span>
+                </div>
+              </div>
+
+              <!-- Sub-Card 2: 100% Solo Friendly -->
+              <div class="bento-card rounded-2xl p-4 flex flex-col justify-between group">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">🤝</span>
+                  <span class="text-xs font-bold text-lime-400">Solo Traveler</span>
+                </div>
+                <div class="mt-3">
+                  <span class="block font-heading font-black text-2xl text-white">100% Asik</span>
+                  <span class="text-[11px] text-gray-400 leading-tight block mt-0.5">Datang sendiri, pulang bestie</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 1: TENTANG & NILAI KOMUNITAS (ASYMMETRIC BENTO GRID)
+         ========================================================================== -->
+    <section id="tentang" class="py-20 relative z-10 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+          <div class="tag-pill">
+            <i class="fa-solid fa-compass"></i>
+            <span>TENTANG KAMI</span>
+          </div>
+          <h2 class="font-heading font-black text-3xl sm:text-4xl text-white tracking-tight">
+            Kenapa Harus Hangout <span class="text-gradient-lime">Bersama Circle?</span>
+          </h2>
+          <p class="text-gray-400 text-sm sm:text-base">
+            Kami membangun wadah yang nyaman, positif, dan seru untuk siapa saja yang ingin memperluas pertemanan di Sumatera Barat.
+          </p>
+        </div>
+
+        <!-- Bento Box Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Bento 1: Wide Feature Card (Col Span 2) -->
+          <div class="bento-card bento-card-highlight md:col-span-2 rounded-3xl p-7 sm:p-8 flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-lime-500/10 border border-lime-500/20 flex items-center justify-center text-lime-400 text-xl shadow-sm">
+                  <i class="fa-solid fa-mountain-sun"></i>
+                </div>
+                <span class="text-xs font-bold text-lime-400 uppercase tracking-wider bg-lime-500/10 px-3 py-1 rounded-full border border-lime-500/20">
+                  Hidden Gems Sumbar
+                </span>
+              </div>
+
+              <h3 class="font-heading font-black text-2xl sm:text-3xl text-white">
+                Trip Alam & Eksplorasi Bersama
+              </h3>
+              <p class="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                Menikmati keindahan alam Ranah Minang yang memesona—mulai dari segarnya gemercik Air Terjun Lubuk Hitam, indahnya Lembah Harau, danau tenang Alahan Panjang, hingga wisata bahari pulau-pulau eksotis di Kawasan Mandeh.
+              </p>
+            </div>
+
+            <div class="pt-6 mt-6 border-t border-white/10 flex flex-wrap items-center gap-3 text-xs font-semibold text-gray-300">
+              <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">🌿 Air Terjun Lubuk Hitam</span>
+              <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">🏕️ Camping & Api Unggun</span>
+              <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">🌊 Wisata Mandeh</span>
+              <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">🏔️ Lembah Harau</span>
+            </div>
+          </div>
+
+          <!-- Bento 2: Kopdar Santai di Cafe -->
+          <div class="bento-card rounded-3xl p-7 flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="w-12 h-12 rounded-2xl bg-lime-500/10 border border-lime-500/20 flex items-center justify-center text-lime-400 text-xl shadow-sm">
+                <i class="fa-solid fa-mug-saucer"></i>
+              </div>
+              <h3 class="font-heading font-bold text-xl text-white">
+                Kopdar Santai di Cafe
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                Agenda nongkrong mingguan di coffee shop hits Kota Padang dan sekitarnya. Tempat ngobrol seru, sharing cerita hidup, dan santai melepas penat bareng.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-white/10 text-xs font-semibold text-lime-400">
+              ☕ Ngopi Santai • Teman Baru
+            </div>
+          </div>
+
+          <!-- Bento 3: Pertemanan Positif & Bebas Canggung -->
+          <div class="bento-card rounded-3xl p-7 flex flex-col justify-between group">
+            <div class="space-y-4">
+              <div class="w-12 h-12 rounded-2xl bg-lime-500/10 border border-lime-500/20 flex items-center justify-center text-lime-400 text-xl shadow-sm">
+                <i class="fa-solid fa-user-group"></i>
+              </div>
+              <h3 class="font-heading font-bold text-xl text-white">
+                Circle Terbuka & Ramah
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                Tidak perlu ragu walaupun baru pertama kali ikut! Komunitas ini dibangun dengan asas saling menghargai, tanpa senioritas, dan no drama.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-white/10 text-xs font-semibold text-lime-400">
+              🤝 No Senioritas • Zero Drama
+            </div>
+          </div>
+
+          <!-- Bento 4: Discord Community Hub (Ngegame, Curhat, Voice 24 Jam) -->
+          <div class="bento-card md:col-span-2 rounded-3xl p-7 sm:p-8 flex flex-col justify-between group relative overflow-hidden">
+            <!-- Discord Ambient Glow -->
+            <div class="absolute -top-12 -right-12 w-48 h-48 bg-[#5865F2]/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="space-y-4 relative z-10">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-[#5865F2]/15 border border-[#5865F2]/30 flex items-center justify-center text-[#7289da] text-2xl shadow-sm">
+                  <i class="fa-brands fa-discord"></i>
+                </div>
+                <span class="text-xs font-bold text-[#7289da] uppercase tracking-wider bg-[#5865F2]/15 px-3 py-1 rounded-full border border-[#5865F2]/30 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#5865F2] animate-pulse"></span>
+                  <span>Voice & Hangout 24 Jam</span>
+                </span>
+              </div>
+
+              <div>
+                <h3 class="font-heading font-black text-2xl sm:text-3xl text-white">
+                  Tempat Ngegame, Curhat & Voice 24 Jam
+                </h3>
+                <p class="text-gray-300 text-sm sm:text-base leading-relaxed mt-2 max-w-2xl">
+                  Suka mabar game online (ML, FF, Valorant, dll) atau sekadar butuh teman ngobrol dan curhat santai larut malam? Server Discord Sumbar Hangout Circle punya voice room yang selalu aktif 24 jam buat kamu yang pengen cari teman tanpa rasa canggung!
+                </p>
+              </div>
+            </div>
+
+            <div class="pt-6 mt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+              <!-- Feature Pills -->
+              <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-gray-300">
+                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">🎮 Mabar Game Online</span>
+                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">🎙️ Voice Room 24 Jam</span>
+                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">🌙 Ruang Curhat Santai</span>
+                <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10">🎧 Denger Lagu Bareng</span>
+              </div>
+
+              <!-- Direct Discord CTA Button -->
+              <a href="https://discord.gg/bBbvepyUeZ" target="_blank" class="official-discord-link btn-discord px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 whitespace-nowrap shadow-md self-start sm:self-auto">
+                <i class="fa-brands fa-discord text-base"></i>
+                <span>Masuk Discord</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Bento 5: Wide Community Solution (Col Span 3) -->
+          <div class="bento-card md:col-span-3 rounded-3xl p-7 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 group">
+            <div class="space-y-2 text-center sm:text-left">
+              <span class="text-xs font-bold text-lime-400 uppercase tracking-wider">
+                Solusi Anti Batal Liburan
+              </span>
+              <h3 class="font-heading font-bold text-xl sm:text-2xl text-white">
+                Pernah Gagal Healing Gara-Gara Teman Sibuk?
+              </h3>
+              <p class="text-gray-400 text-xs sm:text-sm max-w-xl">
+                Di Sumbar Hangout Circle, selalu ada teman jalan yang siap diajak eksplorasi bareng. Jadwal trip tertata, patungan transparan, dan pastinya seru!
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 flex-shrink-0">
+              <a href="https://chat.whatsapp.com/JS7HIwFJaKlJtNHr6Rrsi1" target="_blank" class="direct-join-btn btn-primary-lime px-6 py-3 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 whitespace-nowrap shadow-md">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Ikut Circle Sekarang</span>
+              </a>
+              <a href="https://discord.gg/bBbvepyUeZ" target="_blank" class="official-discord-link btn-discord px-5 py-3 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 whitespace-nowrap shadow-md">
+                <i class="fa-brands fa-discord text-base"></i>
+                <span>Server Discord</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         SECTION 3: GALERI DOKUMENTASI (INTERACTIVE SLIDER / CAROUSEL)
+         ========================================================================== -->
+    <section id="galeri" class="py-24 relative z-10 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header & Filter / Slider Controls -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+          <div class="space-y-3">
+            <div class="tag-pill">
+              <i class="fa-solid fa-photo-film"></i>
+              <span>DOKUMENTASI PERJALANAN</span>
+            </div>
+            <h2 class="font-heading font-black text-3xl sm:text-4xl text-white tracking-tight">
+              Galeri <span class="text-gradient-lime">Foto & Video</span>
+            </h2>
+            <p class="text-gray-400 text-sm sm:text-base max-w-lg">
+              Geser untuk menjelajahi momen seru saat healing, open trip Air Terjun Lubuk Hitam, dan kumpul bareng teman Circle di Sumatera Barat.
+            </p>
+          </div>
+
+          <!-- Controls Bar: Filter Pills + Slider Navigation Buttons -->
+          <div class="flex flex-wrap items-center gap-3 self-start md:self-end">
+            <!-- Filter Pills -->
+            <div class="flex items-center gap-1.5 bg-[#0c140f] p-1.5 rounded-full border border-white/10 shadow-sm">
+              <button data-filter="all" class="media-filter-btn px-4 py-1.5 rounded-full bg-lime-500 text-black font-bold text-xs transition-all">
+                Semua
+              </button>
+              <button data-filter="image" class="media-filter-btn px-4 py-1.5 rounded-full bg-[#101913] text-gray-300 hover:text-white font-medium text-xs transition-all">
+                Foto Saja
+              </button>
+              <button data-filter="video" class="media-filter-btn px-4 py-1.5 rounded-full bg-[#101913] text-gray-300 hover:text-white font-medium text-xs transition-all">
+                Video Saja
+              </button>
+            </div>
+
+            <!-- Carousel Nav Buttons (Prev & Next) -->
+            <div class="flex items-center gap-2">
+              <button id="galleryPrevBtn" class="slider-nav-btn" aria-label="Geser ke kiri" title="Geser ke kiri">
+                <i class="fa-solid fa-chevron-left text-sm"></i>
+              </button>
+              <button id="galleryNextBtn" class="slider-nav-btn" aria-label="Geser ke kanan" title="Geser ke kanan">
+                <i class="fa-solid fa-chevron-right text-sm"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Horizontal Carousel Track -->
+        <div class="relative">
+          <div id="mediaGalleryGrid" class="gallery-slider no-scrollbar">
+            <!-- Rendered dynamically by JavaScript with Bento styling -->
+          </div>
+        </div>
+
+        <!-- Carousel Footer: Indicator Dots & Swipe Hint -->
+        <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-arrows-left-right text-lime-400"></i>
+            <span>Geser (swipe / drag) atau gunakan tombol panah untuk melihat dokumentasi lainnya</span>
+          </div>
+
+          <!-- Dots Indicator Container -->
+          <div id="galleryDotsContainer" class="flex items-center gap-2">
+            <!-- Generated dynamically based on items -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: GABUNG GRUP WHATSAPP & INSTAGRAM RESMI (BENTO CARDS)
+         ========================================================================== -->
+    <section id="gabung" class="py-20 relative z-10 border-t border-white/5">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="bento-card rounded-[2.5rem] p-8 sm:p-12 relative overflow-hidden">
+          
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Info -->
+            <div class="lg:col-span-7 space-y-4">
+              <div class="tag-pill">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>GABUNG SEKARANG</span>
+              </div>
+
+              <h2 class="font-heading font-black text-3xl sm:text-4xl text-white tracking-tight">
+                Pintu Masuk Circle <span class="text-gradient-lime">Selalu Terbuka.</span>
+              </h2>
+
+              <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                Tunggu apa lagi? Langsung klik tombol di bawah untuk bergabung ke grup WhatsApp, server Discord, atau follow Instagram resmi kami. Dapatkan info jadwal open trip dan nongkrong paling awal!
+              </p>
+
+              <!-- Link Display & Quick Copy -->
+              <div class="pt-2 space-y-2">
+                <label class="block text-xs font-semibold text-gray-400">
+                  Tautan Undangan WhatsApp:
+                </label>
+                <div class="flex items-center gap-2">
+                  <input id="groupUrlDisplay" type="text" readonly value="https://chat.whatsapp.com/JS7HIwFJaKlJtNHr6Rrsi1" class="w-full bg-[#070d09] border border-white/10 rounded-xl px-4 py-3 text-xs sm:text-sm text-lime-300 focus:outline-none">
+                  <button id="copyGroupLinkBtn" class="px-5 py-3 rounded-xl bg-lime-500/10 border border-lime-500/30 hover:bg-lime-500 hover:text-black text-lime-400 font-bold text-xs flex items-center gap-2 transition-all whitespace-nowrap" title="Salin Tautan">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Salin</span>
+                  </button>
+                </div>
+                <div id="copyFeedback" class="hidden text-xs text-lime-400 font-semibold pt-1">
+                  <i class="fa-solid fa-circle-check"></i> Tautan berhasil disalin ke clipboard!
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Dual CTA Buttons -->
+            <div class="lg:col-span-5 flex flex-col items-center justify-center p-6 rounded-3xl bg-[#09110c] border border-white/5 space-y-4 text-center">
+              <div class="w-16 h-16 rounded-2xl bg-lime-500/10 border border-lime-500/20 flex items-center justify-center text-lime-400 text-3xl shadow-sm">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+
+              <div>
+                <h3 class="font-heading font-extrabold text-lg text-white">Grup Utama SHC</h3>
+                <p class="text-xs text-gray-400 mt-0.5">Padang & Seluruh Sumatera Barat</p>
+              </div>
+
+              <!-- Direct WhatsApp Button -->
+              <a href="https://chat.whatsapp.com/JS7HIwFJaKlJtNHr6Rrsi1" target="_blank" class="direct-join-btn btn-primary-lime w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-md">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Masuk Grup WhatsApp</span>
+              </a>
+
+              <!-- Join Discord Button -->
+              <a href="https://discord.gg/bBbvepyUeZ" target="_blank" class="official-discord-link btn-discord w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-md">
+                <i class="fa-brands fa-discord text-lg"></i>
+                <span>Gabung Server Discord</span>
+              </a>
+
+              <!-- Follow Instagram Button -->
+              <a href="https://www.instagram.com/sumbarhangoutcircle/" target="_blank" class="official-ig-link btn-ig w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-md">
+                <i class="fa-brands fa-instagram text-lg"></i>
+                <span>Follow @sumbarhangoutcircle</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL: LIGHTBOX PREVIEW FOTO & VIDEO HD
+       ========================================================================== -->
+  <div id="lightboxModal" class="modal-overlay fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl">
+    <div class="lightbox-backdrop absolute inset-0"></div>
+    
+    <button id="lightboxClose" aria-label="Tutup Preview" class="absolute top-5 right-5 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-lg transition-all shadow-lg">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="relative z-10 max-w-4xl w-full flex flex-col items-center bento-card p-4 sm:p-6 rounded-3xl border border-white/10">
+      <div class="rounded-2xl overflow-hidden max-h-[75vh] w-full flex items-center justify-center bg-black">
+        <img id="lightboxImg" src="" alt="Preview Foto" class="w-full h-auto max-h-[75vh] object-contain">
+        <video id="lightboxVideo" controls playsinline class="hidden w-auto h-auto max-h-[75vh] object-contain rounded-xl"></video>
+      </div>
+      <div class="mt-4 text-center">
+        <h4 id="lightboxCaption" class="font-heading font-bold text-lg sm:text-xl text-white"></h4>
+        <p id="lightboxLocation" class="text-xs text-lime-400 flex items-center justify-center gap-1.5 mt-1">
+          <i class="fa-solid fa-location-dot"></i>
+          <span></span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER (BENTO MINIMALIST FOOTER)
+       ========================================================================== -->
+  <footer class="border-t border-white/5 py-12 relative z-10 bg-[#050806]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
+      
+      <!-- Brand Logo in Footer -->
+      <div class="flex items-center justify-center gap-3">
+        <div class="w-8 h-8 rounded-full overflow-hidden border border-lime-400/40 p-0.5 shadow-sm">
+          <img src="assets/images/logo-shc.jpg" alt="Logo SHC" class="w-full h-full object-cover rounded-full">
+        </div>
+        <span class="font-heading font-extrabold text-lg text-white">
+          Sumbar Hangout <span class="text-gradient-lime">Circle</span>
+        </span>
+      </div>
+
+      <!-- Slogan -->
+      <p class="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
+        &ldquo;Cari Teman Baru, Ciptakan Cerita Baru&rdquo; — Komunitas jalan-jalan, healing, dan nongkrong pemuda Sumatera Barat.
+      </p>
+
+      <!-- Quick Nav Links -->
+      <div class="flex flex-wrap items-center justify-center gap-5 text-xs font-semibold text-gray-400 pt-1">
+        <a href="#beranda" class="hover:text-lime-300 transition-colors">Beranda</a>
+        <span>•</span>
+        <a href="#tentang" class="hover:text-lime-300 transition-colors">Tentang</a>
+        <span>•</span>
+        <a href="#galeri" class="hover:text-lime-300 transition-colors">Galeri</a>
+        <span>•</span>
+        <a href="#gabung" class="hover:text-lime-300 transition-colors">Gabung</a>
+        <span>•</span>
+        <a href="https://www.instagram.com/sumbarhangoutcircle/" target="_blank" class="hover:text-pink-400 transition-colors">Instagram</a>
+        <span>•</span>
+        <a href="https://discord.gg/bBbvepyUeZ" target="_blank" class="hover:text-indigo-400 transition-colors">Discord</a>
+        <span>•</span>
+        <a href="https://www.tiktok.com/@sumbarhongoutcircl" target="_blank" class="hover:text-cyan-400 transition-colors">TikTok</a>
+      </div>
+
+      <p class="text-[11px] text-gray-600 pt-4">
+        &copy; 2026 Sumbar Hangout Circle. All rights reserved.
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       HTML5 BACKGROUND AUDIO PLAYER & FLOATING SPOTIFY-STYLE CONTROLLER
+       ========================================================================== -->
+  <audio id="bgAudioPlayer" preload="auto" autoplay>
+    <source src="assets/audio/shape-of-my-heart.webm" type="audio/webm">
+    <source src="assets/audio/shape-of-my-heart.m4a" type="audio/mp4">
+  </audio>
+
+  <!-- Persistent Floating Music Player Bar (Responsive: Bottom Center on Mobile, Bottom Left on Desktop) -->
+  <div class="fixed bottom-4 left-4 right-4 sm:right-auto sm:bottom-6 sm:left-6 z-40 sm:max-w-sm">
+    
+    <!-- Expanded Floating Card -->
+    <div id="floatingMusicPlayer" class="bento-card rounded-2xl p-3 sm:p-3.5 border border-white/10 flex items-center gap-3.5 shadow-2xl transition-all duration-300">
+      
+      <!-- Vinyl Disk Icon -->
+      <div class="relative w-11 h-11 rounded-full bg-black border border-white/10 flex items-center justify-center flex-shrink-0 cursor-pointer music-toggle-btn shadow-sm">
+        <div id="musicVinylDisk" class="w-full h-full rounded-full flex items-center justify-center bg-[radial-gradient(circle,#1a3022_25%,#070d09_60%,#192d20_100%)] border border-lime-500/30">
+          <div class="w-3.5 h-3.5 rounded-full bg-lime-400 flex items-center justify-center text-[8px] text-black shadow-inner">
+            <i class="fa-solid fa-music"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Song Title, Artist & Equalizer -->
+      <div class="flex-1 min-w-0 pr-1 cursor-pointer music-toggle-btn">
+        <div class="flex items-center gap-2">
+          <h4 id="musicTrackTitle" class="font-heading font-extrabold text-xs sm:text-sm text-white truncate">
+            Shape of My Heart
+          </h4>
+          <!-- Animated Equalizer Bars -->
+          <div id="musicEqualizer" class="flex items-end gap-0.5 opacity-0 transition-opacity flex-shrink-0">
+            <span class="equalizer-bar"></span>
+            <span class="equalizer-bar"></span>
+            <span class="equalizer-bar"></span>
+            <span class="equalizer-bar"></span>
+          </div>
+        </div>
+        <p id="musicTrackArtist" class="text-[10px] text-gray-400 truncate">
+          Backstreet Boys (Slowed + Reverb)
+        </p>
+        <div class="flex items-center justify-between text-[10px] mt-0.5">
+          <span id="musicStatusText" class="font-semibold text-gray-500">Klik Play Musik</span>
+          <span id="musicTrackCounter" class="text-lime-400 font-bold ml-2">1/2</span>
+        </div>
+      </div>
+
+      <!-- Controls: Prev, Play/Pause, Next, Mute, Minimize -->
+      <div class="flex items-center gap-1.5 flex-shrink-0">
+        <!-- Prev Track -->
+        <button id="prevTrackBtn" class="w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white flex items-center justify-center text-xs transition-colors" title="Lagu Sebelumnya">
+          <i class="fa-solid fa-backward-step text-[10px]"></i>
+        </button>
+
+        <!-- Play / Pause -->
+        <button class="music-toggle-btn w-9 h-9 rounded-full btn-primary-lime text-black flex items-center justify-center transition-all shadow-md" title="Putar / Jeda Musik">
+          <i class="play-icon-state fa-solid fa-play text-xs ml-0.5"></i>
+        </button>
+
+        <!-- Next Track -->
+        <button id="nextTrackBtn" class="w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white flex items-center justify-center text-xs transition-colors" title="Lagu Selanjutnya">
+          <i class="fa-solid fa-forward-step text-[10px]"></i>
+        </button>
+
+        <!-- Mute / Unmute -->
+        <button id="musicMuteBtn" class="w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white flex items-center justify-center text-xs transition-colors" title="Bisu / Nyalakan Suara">
+          <i class="fa-solid fa-volume-high text-lime-400 text-[10px]"></i>
+        </button>
+
+        <!-- Minimize -->
+        <button id="minimizeMusicBtn" class="w-6 h-6 rounded-full text-gray-500 hover:text-gray-300 flex items-center justify-center text-xs transition-colors" title="Kecilkan Player">
+          <i class="fa-solid fa-minus text-[10px]"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Minimized Round Pill (Appears when minimized) -->
+    <div id="minimizedMusicPill" class="hidden bento-card rounded-full p-2 border border-white/10 flex items-center gap-2 cursor-pointer hover:border-lime-400 transition-all shadow-xl">
+      <div class="w-8 h-8 rounded-full bg-lime-400 text-black flex items-center justify-center text-xs shadow-md">
+        <i class="fa-solid fa-music"></i>
+      </div>
+      <span id="miniTrackTitle" class="text-xs font-bold text-white pr-2.5 truncate max-w-[150px]">Shape of My Heart</span>
+    </div>
+
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="assets/js/main.js?v=20"></script>
+</body>
+</html>
