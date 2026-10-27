@@ -278,17 +278,23 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   gap: 1.5rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 1.25rem;
   padding-top: 0.5rem;
   cursor: grab;
   user-select: none;
+  touch-action: pan-y pinch-zoom;
 }
 
-.gallery-slider.cursor-grabbing {
-  cursor: grabbing;
-  scroll-behavior: auto;
+.gallery-slider.is-dragging {
+  cursor: grabbing !important;
+  scroll-snap-type: none !important;
+  scroll-behavior: auto !important;
+}
+
+.gallery-slide-card img {
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 /* Hide scrollbar cleanly while preserving smooth scroll */

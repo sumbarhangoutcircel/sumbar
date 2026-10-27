@@ -141,6 +141,30 @@ const DAFTAR_MEDIA = [
   },
   {
     id: 5,
+    type: 'image',
+    category: 'Kopdar Santai di Cafe',
+    url: 'assets/images/gallery/kopdar-cafe-1.jpg',
+    title: 'Kopdar Santai & Ngopi Bareng Circle di Cafe',
+    location: 'Coffee Shop, Kota Padang'
+  },
+  {
+    id: 6,
+    type: 'image',
+    category: 'Kopdar Santai di Cafe',
+    url: 'assets/images/gallery/kopdar-cafe-2.jpg',
+    title: 'Momen Kehangatan & Pose Seru Anggota Komunitas',
+    location: 'Coffee Shop, Kota Padang'
+  },
+  {
+    id: 7,
+    type: 'image',
+    category: 'Kopdar Santai di Cafe',
+    url: 'assets/images/gallery/kopdar-cafe-3.jpg',
+    title: 'Sharing Cerita & Melepas Penat Bersama Circle',
+    location: 'Coffee Shop, Kota Padang'
+  },
+  {
+    id: 8,
     type: 'video',
     category: 'First Meet SHC',
     url: 'assets/videos/first-meet-lubuk-hitam.mp4',
@@ -274,11 +298,41 @@ function renderMediaGallery() {
 
   if (!slider) return;
 
-  function getScrollStep() {
-    const card = slider.querySelector('.gallery-slide-card');
-    return card ? card.offsetWidth + 24 : 380;
+  // Mendapatkan index kartu yang paling dekat dengan sisi kiri slider
+  function getClosestCardIndex() {
+    const cards = slider.querySelectorAll('.gallery-slide-card');
+    if (!cards.length) return 0;
+    const sliderLeft = slider.getBoundingClientRect().left;
+    let closestIndex = 0;
+    let minDiff = Infinity;
+    cards.forEach((card, idx) => {
+      const diff = Math.abs(card.getBoundingClientRect().left - sliderLeft);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIndex = idx;
+      }
+    });
+    return closestIndex;
   }
 
+  // Scroll halus ke kartu spesifik berdasarkan index
+  function scrollToCardIndex(index) {
+    const cards = slider.querySelectorAll('.gallery-slide-card');
+    if (!cards.length) return;
+    const clampedIndex = Math.max(0, Math.min(index, cards.length - 1));
+    const targetCard = cards[clampedIndex];
+
+    const sliderRect = slider.getBoundingClientRect();
+    const cardRect = targetCard.getBoundingClientRect();
+    const targetLeft = slider.scrollLeft + (cardRect.left - sliderRect.left);
+
+    slider.scrollTo({
+      left: targetLeft,
+      behavior: 'smooth'
+    });
+  }
+
+  // Update status tombol panah dan titik indikator
   function updateSliderControls() {
     const cards = slider.querySelectorAll('.gallery-slide-card');
     if (!cards.length) {
@@ -291,12 +345,17 @@ function renderMediaGallery() {
     const scrollLeft = slider.scrollLeft;
     const maxScroll = slider.scrollWidth - slider.clientWidth;
 
-    if (prevBtn) prevBtn.disabled = scrollLeft <= 8;
-    if (nextBtn) nextBtn.disabled = scrollLeft >= maxScroll - 8;
+    // Toleransi 4px untuk layar high-DPI
+    if (prevBtn) prevBtn.disabled = scrollLeft <= 4;
+    if (nextBtn) nextBtn.disabled = scrollLeft >= maxScroll - 6;
 
-    // Hitung active index
-    const step = getScrollStep();
-    const activeIndex = Math.min(Math.round(scrollLeft / step), cards.length - 1);
+    // Hitung dot mana yang aktif
+    let activeIndex = 0;
+    if (scrollLeft >= maxScroll - 16) {
+      activeIndex = cards.length - 1;
+    } else {
+      activeIndex = getClosestCardIndex();
+    }
 
     if (dotsContainer) {
       const dots = dotsContainer.querySelectorAll('.gallery-dot');
@@ -310,6 +369,7 @@ function renderMediaGallery() {
     }
   }
 
+  // Render titik indikator
   function renderDots(count) {
     if (!dotsContainer) return;
     if (count <= 1) {
@@ -325,17 +385,12 @@ function renderMediaGallery() {
       dot.addEventListener('click', (e) => {
         e.preventDefault();
         const idx = parseInt(dot.getAttribute('data-index'), 10);
-        const cards = slider.querySelectorAll('.gallery-slide-card');
-        if (cards[idx]) {
-          const sliderRect = slider.getBoundingClientRect();
-          const cardRect = cards[idx].getBoundingClientRect();
-          const targetLeft = slider.scrollLeft + (cardRect.left - sliderRect.left);
-          slider.scrollTo({ left: targetLeft, behavior: 'smooth' });
-        }
+        scrollToCardIndex(idx);
       });
     });
   }
 
+  // Render daftar item media
   function displayItems() {
     const filtered = DAFTAR_MEDIA.filter(item => {
       if (currentFilter === 'all') return true;
@@ -364,14 +419,14 @@ function renderMediaGallery() {
           <div class="relative ${isVideo ? 'h-72 sm:h-80' : 'h-64 sm:h-72'} w-full overflow-hidden rounded-2xl bg-black flex items-center justify-center">
             ${
               isVideo
-                ? `<video src="${item.url}" ${item.poster ? `poster="${item.poster}"` : ''} controls class="w-full h-full object-contain bg-black" preload="metadata" playsinline></video>
+                ? `<video src="${item.url}" ${item.poster ? `poster="${item.poster}"` : ''} controls class="w-full h-full object-contain bg-black" preload="metadata" playsinline draggable="false"></video>
                    <div class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold uppercase bg-red-600/90 backdrop-blur-md text-white flex items-center gap-1.5 shadow-md pointer-events-none">
                      <i class="fa-solid fa-video"></i> Video HD
                    </div>
                    <button class="gallery-preview-video-btn absolute top-3 right-3 px-3 py-1 rounded-lg bg-black/75 hover:bg-black/95 text-white text-xs font-semibold border border-white/20 flex items-center gap-1.5 transition-all shadow-md" data-src="${item.url}" data-title="${item.title}" data-loc="${item.location}">
                      <i class="fa-solid fa-expand text-[10px]"></i> Layar Penuh
                    </button>`
-                : `<img src="${item.url}" alt="${item.title}" class="zoom-img w-full h-full object-cover cursor-pointer gallery-preview-img" data-title="${item.title}" data-loc="${item.location}" data-src="${item.url}" onerror="this.src='assets/images/logo-shc.jpg'">
+                : `<img src="${item.url}" alt="${item.title}" draggable="false" class="zoom-img w-full h-full object-cover cursor-pointer gallery-preview-img" data-title="${item.title}" data-loc="${item.location}" data-src="${item.url}" onerror="this.src='assets/images/logo-shc.jpg'">
                    <div class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold uppercase bg-lime-500/90 backdrop-blur-md text-black flex items-center gap-1.5 shadow-md pointer-events-none">
                      <i class="fa-solid fa-camera"></i> Foto HD
                    </div>
@@ -382,7 +437,7 @@ function renderMediaGallery() {
 
             ${item.category && !isVideo ? `
               <div class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-[11px] font-medium text-lime-300 pointer-events-none border border-white/10 flex items-center gap-1">
-                <i class="fa-solid fa-tree text-[10px]"></i>
+                <i class="fa-solid ${item.category.includes('Cafe') || item.category.includes('Kopdar') ? 'fa-mug-saucer' : 'fa-tree'} text-[10px]"></i>
                 <span>${item.category}</span>
               </div>
             ` : ''}
@@ -462,47 +517,74 @@ function renderMediaGallery() {
     });
   }
 
-  // Navigation Prev / Next
+  // Navigation Prev / Next (Pindah per-kartu dengan mulus)
   if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      slider.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const currentIdx = getClosestCardIndex();
+      scrollToCardIndex(Math.max(0, currentIdx - 1));
     });
   }
 
   if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      slider.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const cards = slider.querySelectorAll('.gallery-slide-card');
+      const currentIdx = getClosestCardIndex();
+      scrollToCardIndex(Math.min(cards.length - 1, currentIdx + 1));
     });
   }
 
   slider.addEventListener('scroll', updateSliderControls, { passive: true });
 
-  // Mouse Drag to Scroll (Desktop)
+  // Mouse Drag to Scroll Tanpa Membuka Lightbox Secara Tidak Sengaja
   let isDown = false;
   let startX = 0;
   let scrollStartLeft = 0;
+  let hasDragged = false;
 
   slider.addEventListener('mousedown', (e) => {
+    // Abaikan jika bukan tombol klik kiri, atau klik kontrol tombol/video/link
+    if (e.button !== 0) return;
     if (e.target.closest('button') || e.target.closest('video') || e.target.closest('a')) return;
+
     isDown = true;
-    slider.classList.add('cursor-grabbing');
-    startX = e.pageX - slider.offsetLeft;
+    hasDragged = false;
+    slider.classList.add('is-dragging');
+    startX = e.pageX;
     scrollStartLeft = slider.scrollLeft;
   });
 
   window.addEventListener('mouseup', () => {
     if (!isDown) return;
     isDown = false;
-    slider.classList.remove('cursor-grabbing');
+    slider.classList.remove('is-dragging');
+
+    // Beri jeda kecil sebelum mereset hasDragged agar klik yang terjadi saat drag terblokir
+    setTimeout(() => {
+      hasDragged = false;
+      updateSliderControls();
+    }, 60);
   });
 
   slider.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 1.3;
-    slider.scrollLeft = scrollStartLeft - walk;
+    const diff = e.pageX - startX;
+    if (Math.abs(diff) > 6) {
+      hasDragged = true;
+    }
+    slider.scrollLeft = scrollStartLeft - diff;
   });
+
+  // Blokir event click jika pengguna sedang men-drag
+  slider.addEventListener('click', (e) => {
+    if (hasDragged) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }
+  }, true);
 
   // Filter Buttons
   filterBtns.forEach(btn => {
